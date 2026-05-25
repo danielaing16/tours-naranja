@@ -1,11 +1,12 @@
 import { planMock } from '../data/mockData';
+import { apiUrl } from '../lib/apiUrl.js';
 
 /**
  * Llama al motor real en el backend.
  * @param {object} prefs — datos del formulario Personaliza
  */
 export async function fetchPlanFromApi(prefs) {
-  const res = await fetch('/api/planes/generar', {
+  const res = await fetch(apiUrl('/api/planes/generar'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(prefs),

@@ -1,3 +1,5 @@
+import { apiUrl } from '../lib/apiUrl.js';
+
 export function getAdminToken() {
   return sessionStorage.getItem('adminToken');
 }
@@ -21,7 +23,7 @@ export async function adminFetch(url, options = {}) {
   }
   if (token) headers.Authorization = `Bearer ${token}`;
 
-  const res = await fetch(url, { ...options, headers });
+  const res = await fetch(apiUrl(url), { ...options, headers });
 
   if (res.status === 401) {
     clearAdminSession();

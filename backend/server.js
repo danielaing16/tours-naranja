@@ -26,7 +26,11 @@ import {
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors({ origin: 'http://localhost:5173' }));
+const corsOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173')
+  .split(',')
+  .map((s) => s.trim().replace(/\/$/, ''))
+  .filter(Boolean);
+app.use(cors({ origin: corsOrigins, credentials: true }));
 app.use(express.json());
 ensurePaquetesImgDir();
 ensureGaleriaDir();

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import LogoMark from '../../components/LogoMark';
+import { apiUrl } from '../../lib/apiUrl.js';
 import { setAdminSession } from '../../utils/adminApi';
 
 function MailIcon() {
@@ -44,7 +45,7 @@ export default function AdminLogin() {
     setError('');
 
     try {
-      const res = await fetch('/api/admin/login', {
+      const res = await fetch(apiUrl('/api/admin/login'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

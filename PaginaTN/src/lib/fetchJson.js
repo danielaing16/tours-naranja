@@ -1,5 +1,7 @@
+import { apiUrl } from './apiUrl.js';
+
 export async function fetchJson(url, options = {}) {
-  const res = await fetch(url, options);
+  const res = await fetch(apiUrl(url), options);
   const text = await res.text();
   let data = null;
 

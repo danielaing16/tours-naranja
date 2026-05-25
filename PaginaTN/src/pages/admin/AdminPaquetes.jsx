@@ -4,6 +4,7 @@ import { adminFetch } from '../../utils/adminApi';
 import { AdminImagePreview } from '../../components/SafeImage';
 import AdminPageHeader from '../../components/admin/AdminPageHeader';
 import { consumeAdminPreviewEditId, setAdminPreviewReturn } from '../../utils/adminPreview';
+import { apiUrl } from '../../lib/apiUrl.js';
 import {
   INTERESES_OPCIONES,
   formVacioPaquete,
@@ -42,7 +43,7 @@ export default function AdminPaquetes() {
 
   useEffect(() => {
     cargarLista();
-    fetch('/api/destinos')
+    fetch(apiUrl('/api/destinos'))
       .then((r) => r.json())
       .then((data) => setDestinos(Array.isArray(data) ? data : []))
       .catch(() => {});
