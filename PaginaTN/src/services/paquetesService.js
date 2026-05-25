@@ -1,8 +1,8 @@
 import { paquetes as mockPaquetes } from '../data/mockData';
 import { fetchJson } from '../lib/fetchJson';
 
-/** Sustituir por API cuando el backend esté en producción. */
-const USE_MOCK_FALLBACK = true;
+/** Solo en desarrollo local: datos de prueba si el backend no responde. */
+const USE_MOCK_FALLBACK = import.meta.env.DEV;
 
 export async function fetchPaquetes() {
   try {
@@ -11,8 +11,12 @@ export async function fetchPaquetes() {
     if (lista.length === 0 && USE_MOCK_FALLBACK) return mockPaquetes;
     return lista;
   } catch (err) {
-    if (!USE_MOCK_FALLBACK) throw err;
-    return mockPaquetes;
+    if (USE_MOCK_FALLBACK) return mockPaquetes;
+    throw new Error(
+      err.message?.includes('backend')
+        ? err.message
+        : `${err.message} — Revisa VITE_API_URL en Vercel y que Render esté activo.`
+    );
   }
 }
 
@@ -20,10 +24,11 @@ export async function fetchPaqueteById(id) {
   try {
     return await fetchJson(`/api/paquetes/${id}`);
   } catch (err) {
-    if (!USE_MOCK_FALLBACK) throw err;
-    const found = mockPaquetes.find((p) => String(p.id) === String(id));
-    if (!found) throw new Error('Paquete no encontrado');
-    return found;
+    if (USE_MOCK_FALLBACK) {
+      const found = mockPaquetes.find((p) => String(p.id) === String(id));
+      if (found) return found;
+    }
+    throw err;
   }
 }
 

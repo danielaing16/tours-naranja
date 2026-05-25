@@ -17,10 +17,12 @@ export async function fetchBlogPosts() {
     const data = await fetchJson('/api/blog');
     const list = Array.isArray(data) ? data.map(mapPost) : [];
     if (list.length > 0) return list;
-  } catch {
-    /* fallback si la BD está vacía o el backend no responde */
+  } catch (e) {
+    if (import.meta.env.DEV) return mockPosts;
+    throw e;
   }
-  return mockPosts;
+  if (import.meta.env.DEV) return mockPosts;
+  return [];
 }
 
 /** Artículo por slug (público) */

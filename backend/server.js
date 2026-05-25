@@ -271,7 +271,12 @@ app.get('/api/paquetes/:id', async (req, res) => {
       .eq('id', req.params.id)
       .single();
 
-    if (error) throw error;
+    if (error) {
+      if (error.code === 'PGRST116') {
+        return res.status(404).json({ error: 'Paquete no encontrado' });
+      }
+      throw error;
+    }
 
     const [one] = await attachDestinos([data]);
     res.json(one);
