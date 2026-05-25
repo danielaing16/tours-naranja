@@ -2,12 +2,12 @@
 export default {
   name: 'Tours Naranja',
   location: 'Montería, Córdoba, Colombia',
-  email: 'hola@toursnaranja.com',
+  email: 'toursnaranjasas@gmail.com',
   showDevBanner: false,
 
   social: {
-    instagram: 'https://www.instagram.com/',
-    facebook: 'https://www.facebook.com/',
+    instagram: 'https://www.instagram.com/toursnaranja/',
+    facebook: '',
     youtube: '',
     tiktok: '',
   },

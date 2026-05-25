@@ -1,0 +1,158 @@
+/* Responsive — móvil, tablet y escritorio */
+
+@media (max-width: 960px) {
+  .container {
+    width: min(1140px, calc(100% - 32px));
+  }
+}
+
+@media (max-width: 720px) {
+  .grid-3 {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    width: calc(100% - 24px);
+  }
+
+  .main-content--site {
+    padding-top: 52px;
+  }
+
+  .main-content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .paquetes-filters,
+  .page-minimal-bar .paquetes-filters {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 8px;
+    padding-bottom: 6px;
+    max-width: 100%;
+    scrollbar-width: thin;
+  }
+
+  .paquetes-filter-chip {
+    flex-shrink: 0;
+  }
+
+  .footer-contact-lines a {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .footer-bar-nav {
+    flex-wrap: wrap;
+    gap: 10px 14px;
+  }
+
+  .footer-social {
+    flex-wrap: wrap;
+  }
+
+  .trust-strip-inner {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .detail {
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .detail-img {
+    min-height: 200px;
+    max-height: 45vh;
+    aspect-ratio: 16 / 10;
+  }
+
+  .detail-body {
+    padding: 20px 16px 24px;
+  }
+
+  .detail-actions {
+    flex-direction: column;
+  }
+
+  .detail-actions .btn {
+    width: 100%;
+  }
+
+  .blog-article-cover {
+    max-height: 45vh;
+    object-fit: cover;
+  }
+
+  .blog-article-title {
+    font-size: clamp(1.45rem, 6vw, 2rem);
+  }
+
+  .result-summary {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .result-actions .btn,
+  .page-minimal-cta,
+  .paquetes-header-cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .home-location-inner {
+    gap: 20px;
+  }
+
+  .home-contact-form,
+  .home-location-form-wrap {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .plan-intro {
+    padding: 18px 16px;
+  }
+
+  .skeleton-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 380px) {
+  .nav-shell {
+    padding: 8px 12px;
+  }
+
+  .nav-brand-text--stacked {
+    font-size: 0.82rem;
+  }
+
+  .btn {
+    padding: 11px 16px;
+    font-size: 0.88rem;
+  }
+
+  .result-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .about-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .home-experience-stats {
+    grid-template-columns: 1fr;
+  }
+}
