@@ -1,0 +1,21 @@
+GALERÍA — INICIO (Experiencias en imágenes)
+============================================
+
+Copia aquí tus archivos con ESTOS nombres exactos:
+
+VIDEO (panel grande izquierda):
+  experiencias.mp4
+
+Imagen de portada si el video tarda en cargar (opcional):
+  poster.jpg
+
+FOTOS de la franja inferior (4 imágenes):
+  1-naturaleza-rio.jpg      → "Naturaleza y río"
+  2-aventura-cordoba.jpg    → "Aventura en Córdoba"
+  3-rutas-patrimonio.jpg    → "Rutas patrimonio"
+  4-sabores-cordobesos.jpg  → "Sabores cordobeses"
+
+Formatos: .mp4 para video; .jpg o .png para fotos.
+Recomendado: fotos horizontales ~1200px de ancho; video MP4 H.264.
+
+Después recarga la página de inicio (Ctrl+F5).

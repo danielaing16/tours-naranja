@@ -1,0 +1,172 @@
+/* Páginas públicas — animaciones al entrar y scroll reveal */
+
+.page-motion {
+  animation: pageEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-minimal-header,
+.paquetes-header,
+.page-header {
+  animation: pageHeaderIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.06s both;
+}
+
+@keyframes pageHeaderIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-minimal-bar,
+.paquetes-header-bar,
+.about-values,
+.about-intro-card {
+  animation: pageHeaderIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+}
+
+.plan-form-section,
+.about-section-card,
+.detail.card,
+.blog-article,
+.result-header,
+.result-grid > .card {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.about-section-card:hover,
+.detail.card:hover,
+.blog-article:hover,
+.result-header:hover,
+.result-grid > .card:hover {
+  transform: translateY(-3px);
+}
+
+.card.blog-card {
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease,
+    border-color 0.3s ease;
+}
+
+.card.blog-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+}
+
+.card.blog-card img,
+.card.blog-card .safe-image-missing {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card.blog-card:hover img,
+.card.blog-card:hover .safe-image-missing {
+  transform: scale(1.04);
+}
+
+.paquetes-filter-chip {
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.paquetes-filter-chip:active {
+  transform: scale(0.97);
+}
+
+.paquetes-cta,
+.page-minimal-cta-band,
+.about-cta-band {
+  animation: pageHeaderIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+.paquetes-cta-btn,
+.page-minimal-cta-band-btn,
+.page-minimal-cta,
+.plan-sidebar-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.paquetes-cta-btn:hover,
+.page-minimal-cta-band-btn:hover,
+.page-minimal-cta:hover {
+  transform: translateY(-2px);
+}
+
+.about-stat {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.about-stat:hover {
+  transform: translateY(-4px);
+}
+
+.back-link {
+  display: inline-flex;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.back-link:hover {
+  transform: translateX(-4px);
+}
+
+.detail-img,
+.result-img,
+.blog-article img {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.detail.card:hover .detail-img,
+.result-grid > .card:hover .result-img,
+.blog-article:hover img {
+  transform: scale(1.02);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-motion,
+  .page-minimal-header,
+  .paquetes-header,
+  .page-header,
+  .page-minimal-bar,
+  .paquetes-header-bar,
+  .about-values,
+  .about-intro-card,
+  .paquetes-cta,
+  .page-minimal-cta-band,
+  .about-cta-band {
+    animation: none !important;
+  }
+
+  .about-section-card:hover,
+  .detail.card:hover,
+  .blog-article:hover,
+  .result-header:hover,
+  .result-grid > .card:hover,
+  .card.blog-card:hover,
+  .about-stat:hover,
+  .paquetes-cta-btn:hover,
+  .page-minimal-cta-band-btn:hover,
+  .page-minimal-cta:hover,
+  .back-link:hover {
+    transform: none;
+  }
+
+  .card.blog-card:hover img,
+  .detail.card:hover .detail-img,
+  .result-grid > .card:hover .result-img,
+  .blog-article:hover img {
+    transform: none;
+  }
+}

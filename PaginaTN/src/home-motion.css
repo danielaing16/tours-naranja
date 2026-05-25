@@ -1,0 +1,467 @@
+/* Home — movimiento dinámico */
+
+/* Hero fondo Ken Burns */
+.hero--cover {
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(1);
+  animation: heroKenBurns 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes heroKenBurns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.08) translate(-1.2%, -0.8%);
+  }
+}
+
+.hero-content--dynamic {
+  animation: none;
+}
+
+.hero-anim {
+  opacity: 0;
+  animation: heroStaggerIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-anim--1 { animation-delay: 0.12s; }
+.hero-anim--2 { animation-delay: 0.28s; }
+.hero-anim--3 { animation-delay: 0.44s; }
+.hero-anim--4 { animation-delay: 0.58s; }
+
+.hero-title-highlight.hero-anim {
+  display: inline-block;
+  animation:
+    heroStaggerIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.44s forwards,
+    heroHighlightGlow 3.5s ease-in-out 1.2s infinite;
+}
+
+@keyframes heroStaggerIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes heroHighlightGlow {
+  0%,
+  100% {
+    text-shadow: 0 3px 16px rgba(0, 0, 0, 0.4);
+    filter: brightness(1);
+  }
+  50% {
+    text-shadow: 0 3px 24px rgba(243, 112, 33, 0.55), 0 0 40px rgba(243, 112, 33, 0.2);
+    filter: brightness(1.06);
+  }
+}
+
+.btn-hero-pulse {
+  animation: heroStaggerIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.72s backwards,
+    heroBtnFloat 4s ease-in-out 1.6s infinite;
+}
+
+@keyframes heroBtnFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 4px 12px rgba(243, 112, 33, 0.4);
+  }
+  50% {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.38), 0 8px 20px rgba(243, 112, 33, 0.45);
+  }
+}
+
+.btn-hero-pulse:hover {
+  animation: none;
+}
+
+/* Presentación — sube sobre el hero */
+.home-presentation-reveal {
+  width: 100%;
+}
+
+.home-presentation-inner {
+  animation: presentationRise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.35s backwards;
+}
+
+@keyframes presentationRise {
+  from {
+    opacity: 0;
+    transform: translateY(48px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home-pres-anim {
+  opacity: 0;
+  animation: presSegIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.home-pres-anim--1 { animation-delay: 0.55s; }
+.home-pres-anim--2 { animation-delay: 0.68s; }
+.home-pres-anim--3 { animation-delay: 0.81s; }
+
+@keyframes presSegIn {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.home-presentation-bar-icon {
+  animation: pinBounce 2.8s ease-in-out 1.2s infinite;
+}
+
+@keyframes pinBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Reveal — variantes dinámicas */
+.reveal--left {
+  transform: translateX(-48px);
+}
+
+.reveal--right {
+  transform: translateX(48px);
+}
+
+.reveal--scale {
+  transform: scale(0.94) translateY(16px);
+}
+
+.reveal--down {
+  transform: translateY(-24px);
+}
+
+.reveal--fade {
+  transform: none;
+}
+
+.reveal--in.reveal--left,
+.reveal--in.reveal--right,
+.reveal--in.reveal--scale,
+.reveal--in.reveal--down,
+.reveal--in.reveal--fade {
+  transform: none;
+}
+
+/* Paquetes destacados */
+.home-packages-head {
+  transition: transform 0.4s ease;
+}
+
+.btn-ver-mas {
+  animation: verMasWiggle 6s ease-in-out 2s infinite;
+}
+
+@keyframes verMasWiggle {
+  0%,
+  88%,
+  100% {
+    transform: rotate(0deg);
+  }
+  90% {
+    transform: rotate(-3deg);
+  }
+  94% {
+    transform: rotate(3deg);
+  }
+  98% {
+    transform: rotate(-2deg);
+  }
+}
+
+.btn-ver-mas:hover {
+  animation: none;
+}
+
+a.package-card--overlay {
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s ease,
+    opacity 0.25s ease;
+}
+
+a.package-card--overlay:hover {
+  opacity: 1;
+  transform: translateY(-8px) scale(1.015);
+  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.22);
+}
+
+a.package-card--overlay .package-card-media img {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+a.package-card--overlay:hover .package-card-media img {
+  transform: scale(1.06);
+}
+
+.package-card-glass {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease;
+}
+
+a.package-card--overlay:hover .package-card-glass {
+  transform: translate(-50%, -50%) scale(1.04);
+  background: rgba(45, 45, 45, 0.78);
+}
+
+.home-gallery-split > .reveal {
+  min-height: 520px;
+  height: 100%;
+}
+
+.home-gallery-split > .reveal > .home-gallery-media,
+.home-gallery-split > .reveal > .home-gallery-panel {
+  height: 100%;
+  min-height: 520px;
+}
+
+.reveal--in .home-gallery-highlights li {
+  animation: presSegIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+}
+
+.reveal--in .home-gallery-highlights li:nth-child(1) { animation-delay: 0.12s; }
+.reveal--in .home-gallery-highlights li:nth-child(2) { animation-delay: 0.2s; }
+.reveal--in .home-gallery-highlights li:nth-child(3) { animation-delay: 0.28s; }
+.reveal--in .home-gallery-highlights li:nth-child(4) { animation-delay: 0.36s; }
+.reveal--in .home-gallery-highlights li:nth-child(5) { animation-delay: 0.44s; }
+
+.home-gallery-video-badge svg {
+  animation: playPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes playPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+.home-gallery-strip-item {
+  transition: transform 0.35s ease, border-color 0.35s ease;
+}
+
+.home-gallery-strip-item:hover {
+  transform: scale(1.04);
+  border-color: var(--orange);
+  z-index: 2;
+}
+
+.home-gallery-highlight-icon {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.home-gallery-highlights li:hover .home-gallery-highlight-icon {
+  transform: scale(1.12) rotate(-4deg);
+}
+
+.home-gallery-panel-cta {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Por qué elegirnos */
+.home-why-panel {
+  transition: filter 0.25s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.home-why-panel:hover {
+  transform: translateY(-6px);
+}
+
+.home-why-panel-icon {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.home-why-panel:hover .home-why-panel-icon {
+  transform: scale(1.1) translateY(-3px);
+}
+
+/* Cómo funciona — decoración flotante */
+.home-how-deco--right {
+  animation: floatOrb 8s ease-in-out infinite;
+}
+
+.home-how-deco--left {
+  animation: floatOrb 10s ease-in-out 1s infinite reverse;
+}
+
+@keyframes floatOrb {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(12px, -18px) scale(1.05);
+  }
+  66% {
+    transform: translate(-8px, 10px) scale(0.96);
+  }
+}
+
+.home-how-photo {
+  overflow: hidden;
+}
+
+.home-how-photo img {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.home-how-row:hover .home-how-photo img {
+  transform: scale(1.05);
+}
+
+.home-how-link {
+  transition: transform 0.2s ease, color 0.2s ease;
+  display: inline-flex;
+}
+
+.home-how-link:hover {
+  transform: translateX(4px);
+}
+
+/* Experiencia */
+.home-experience-mark-dot {
+  animation: dotPop 2s ease-in-out infinite;
+}
+
+.home-experience-mark-dot:nth-of-type(2) {
+  animation-delay: 0.2s;
+}
+
+.home-experience-mark-dot:nth-of-type(3) {
+  animation-delay: 0.4s;
+}
+
+.home-experience-mark-dot:nth-of-type(4) {
+  animation-delay: 0.6s;
+}
+
+@keyframes dotPop {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 0.7;
+  }
+}
+
+.home-experience-stat {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.home-experience-stat:hover {
+  transform: translateY(-4px);
+}
+
+.home-experience-stat-icon {
+  transition: transform 0.35s ease;
+}
+
+.home-experience-stat:hover .home-experience-stat-icon {
+  transform: scale(1.1) rotate(-6deg);
+}
+
+/* Contacto */
+.home-location-bg {
+  animation: locationKenBurns 28s ease-in-out infinite alternate;
+}
+
+@keyframes locationKenBurns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.06);
+  }
+}
+
+.home-location-panel {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+}
+
+.home-location-panel:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.18);
+}
+
+.home-location-btn {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.home-location-btn:hover {
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg,
+  .hero-anim,
+  .hero-title-highlight,
+  .btn-hero-pulse,
+  .home-presentation-inner,
+  .home-pres-anim,
+  .home-presentation-bar-icon,
+  .btn-ver-mas,
+  .home-gallery-video-badge svg,
+  .home-how-deco--right,
+  .home-how-deco--left,
+  .home-experience-mark-dot,
+  .home-location-bg {
+    animation: none !important;
+  }
+
+  .reveal--left,
+  .reveal--right,
+  .reveal--scale,
+  .reveal--down {
+    transform: none;
+  }
+
+  a.package-card--overlay:hover,
+  .home-why-panel:hover,
+  .home-experience-stat:hover,
+  .home-location-panel:hover {
+    transform: none;
+  }
+
+  a.package-card--overlay:hover .package-card-media img,
+  .home-how-row:hover .home-how-photo img {
+    transform: none;
+  }
+}
