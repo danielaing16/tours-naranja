@@ -31,8 +31,8 @@ export default function CreaTuPlan() {
   const [personas, setPersonas] = useState('2');
   const [tipoViaje, setTipoViaje] = useState('pareja');
   const [intereses, setIntereses] = useState([]);
-  const [necesitaTransporte, setNecesitaTransporte] = useState('');
-  const [hospedaje, setHospedaje] = useState('');
+  const [necesitaTransporte, setNecesitaTransporte] = useState('no');
+  const [hospedaje, setHospedaje] = useState('no');
   const [gastronomiaAliados, setGastronomiaAliados] = useState('no');
   const [detallesAdicionales, setDetallesAdicionales] = useState('');
   const [formError, setFormError] = useState('');
@@ -339,7 +339,6 @@ export default function CreaTuPlan() {
                     onChange={(e) => setNecesitaTransporte(e.target.value)}
                     required
                   >
-                    <option value="">{p.selectOption}</option>
                     <option value="si">{p.transportYes}</option>
                     <option value="no">{p.transportNo}</option>
                     <option value="parcial">{p.transportPartial}</option>
@@ -352,10 +351,8 @@ export default function CreaTuPlan() {
                     onChange={(e) => setHospedaje(e.target.value)}
                     required
                   >
-                    <option value="">{p.selectOption}</option>
                     <option value="si">{p.lodgingYes}</option>
                     <option value="no">{p.lodgingNo}</option>
-                    <option value="ya_tengo">{p.lodgingHave}</option>
                   </FormSelect>
                 </div>
 

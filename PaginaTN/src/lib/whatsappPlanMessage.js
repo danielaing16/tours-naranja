@@ -71,7 +71,6 @@ function mapLodging(prefs, planForm) {
   const map = {
     si: planForm.lodgingYes,
     no: planForm.lodgingNo,
-    ya_tengo: planForm.lodgingHave,
   };
   return map[prefs.hospedaje] || prefs.hospedaje;
 }
