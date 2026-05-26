@@ -96,6 +96,10 @@ export default function ContactForm({ compact = false }) {
       <button type="submit" className={compact ? 'home-contact-submit' : 'btn btn-primary btn-block'} disabled={enviando}>
         {enviando ? t.sending : t.submit}
       </button>
+
+      <p className={`contact-form-privacy${compact ? ' contact-form-privacy--compact' : ''}`}>
+        {t.privacyNotice}
+      </p>
     </form>
   );
 }

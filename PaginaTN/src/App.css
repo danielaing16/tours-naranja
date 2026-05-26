@@ -2710,6 +2710,24 @@ span.page-minimal-chip {
   cursor: wait;
 }
 
+.contact-form-privacy {
+  margin: 12px 0 0;
+  font-size: 0.68rem;
+  line-height: 1.45;
+  color: #94a3b8;
+  max-width: 42rem;
+}
+
+.contact-form-privacy--compact {
+  margin-top: 10px;
+  font-size: 0.65rem;
+  color: rgba(100, 116, 139, 0.95);
+}
+
+.contact-form .contact-form-privacy {
+  margin-top: 14px;
+}
+
 .package-card .safe-image-missing,
 .gallery-slide .safe-image-missing {
   min-height: min(52vh, 480px);

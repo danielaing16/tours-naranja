@@ -72,6 +72,8 @@ export default {
     submit: 'Enviar mensaje',
     success: 'Mensaje enviado correctamente.',
     errorSend: 'No se pudo enviar el mensaje',
+    privacyNotice:
+      'Al enviar, autorizas el tratamiento de tus datos (nombre, correo y mensaje) para atender tu solicitud, según la Ley 1581 de 2012 y la normativa colombiana de protección de datos personales (Habeas Data).',
   },
   paquetes: {
     customizeTrip: 'Personalizar viaje',

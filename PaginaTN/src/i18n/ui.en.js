@@ -72,6 +72,8 @@ export default {
     submit: 'Send message',
     success: 'Message sent successfully.',
     errorSend: 'Could not send message',
+    privacyNotice:
+      'By submitting, you authorize Tours Naranja to process your data (name, email, and message) to respond to your request, in accordance with Colombian Law 1581 of 2012 and personal data protection regulations.',
   },
   paquetes: {
     customizeTrip: 'Customize trip',
