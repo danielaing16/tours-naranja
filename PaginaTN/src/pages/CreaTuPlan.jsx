@@ -33,7 +33,7 @@ export default function CreaTuPlan() {
   const [intereses, setIntereses] = useState([]);
   const [necesitaTransporte, setNecesitaTransporte] = useState('');
   const [hospedaje, setHospedaje] = useState('');
-  const [gastronomiaAliados, setGastronomiaAliados] = useState('');
+  const [gastronomiaAliados, setGastronomiaAliados] = useState('no');
   const [detallesAdicionales, setDetallesAdicionales] = useState('');
   const [formError, setFormError] = useState('');
 
@@ -50,6 +50,34 @@ export default function CreaTuPlan() {
       .finally(() => setCargandoDestinos(false));
   // eslint-disable-next-line react-hooks/exhaustive-deps -- carga única al montar
   }, []);
+
+  // Ajustar automáticamente el número de personas según el tipo de viaje.
+  // - Viaje solo  → siempre 1 persona.
+  // - Pareja      → siempre 2 personas.
+  useEffect(() => {
+    if (tipoViaje === 'solo' && personas !== '1') {
+      setPersonas('1');
+    } else if (tipoViaje === 'pareja' && personas !== '2') {
+      setPersonas('2');
+    }
+  }, [tipoViaje, personas]);
+
+  function getPeopleOptions() {
+    if (tipoViaje === 'solo') {
+      return [{ value: '1', label: p.people1 }];
+    }
+    if (tipoViaje === 'pareja') {
+      return [{ value: '2', label: p.people2 }];
+    }
+    // Familia / amigos: se permiten todos los tamaños de grupo.
+    return [
+      { value: '1', label: p.people1 },
+      { value: '2', label: p.people2 },
+      { value: '3', label: p.people3 },
+      { value: '4', label: p.people4 },
+      { value: '5+', label: p.people5 },
+    ];
+  }
 
   function toggleDestino(id) {
     setAyudaElegir(false);
@@ -198,21 +226,35 @@ export default function CreaTuPlan() {
                   </div>
                 </div>
 
-                <div className="plan-field-row">
-                  <div className="plan-field">
-                    <label htmlFor="dias">{p.daysLabel}</label>
-                    <input
-                      id="dias"
-                      className="plan-input"
-                      type="number"
-                      min="1"
-                      max="14"
-                      placeholder={p.daysPlaceholder}
-                      value={dias}
-                      onChange={(e) => setDias(e.target.value)}
-                      required
-                    />
-                  </div>
+                <div className="plan-field">
+                  <label htmlFor="dias">{p.daysLabel}</label>
+                  <input
+                    id="dias"
+                    className="plan-input"
+                    type="number"
+                    min="1"
+                    max="14"
+                    placeholder={p.daysPlaceholder}
+                    value={dias}
+                    onChange={(e) => setDias(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="plan-field-row plan-field-row--stack-sm">
+                  <FormSelect
+                    id="tipoViaje"
+                    label={p.tripTypeLabel}
+                    value={tipoViaje}
+                    onChange={(e) => setTipoViaje(e.target.value)}
+                    required
+                  >
+                    <option value="pareja">{p.tripCouple}</option>
+                    <option value="familia">{p.tripFamily}</option>
+                    <option value="amigos">{p.tripFriends}</option>
+                    <option value="solo">{p.tripSolo}</option>
+                  </FormSelect>
+
                   <FormSelect
                     id="personas"
                     label={p.peopleLabel}
@@ -220,26 +262,13 @@ export default function CreaTuPlan() {
                     onChange={(e) => setPersonas(e.target.value)}
                     required
                   >
-                    <option value="1">{p.people1}</option>
-                    <option value="2">{p.people2}</option>
-                    <option value="3">{p.people3}</option>
-                    <option value="4">{p.people4}</option>
-                    <option value="5+">{p.people5}</option>
+                    {getPeopleOptions().map(({ value, label }) => (
+                      <option key={value} value={value}>
+                        {label}
+                      </option>
+                    ))}
                   </FormSelect>
                 </div>
-
-                <FormSelect
-                  id="tipoViaje"
-                  label={p.tripTypeLabel}
-                  value={tipoViaje}
-                  onChange={(e) => setTipoViaje(e.target.value)}
-                  required
-                >
-                  <option value="pareja">{p.tripCouple}</option>
-                  <option value="familia">{p.tripFamily}</option>
-                  <option value="amigos">{p.tripFriends}</option>
-                  <option value="solo">{p.tripSolo}</option>
-                </FormSelect>
 
               </section>
 
@@ -338,7 +367,6 @@ export default function CreaTuPlan() {
                   onChange={(e) => setGastronomiaAliados(e.target.value)}
                   required
                 >
-                  <option value="">{p.selectOption}</option>
                   <option value="si">{p.foodYes}</option>
                   <option value="no">{p.foodNo}</option>
                 </FormSelect>
