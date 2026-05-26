@@ -5,6 +5,7 @@ import Reveal from '../components/ui/Reveal';
 import { whatsappUrl } from '../constants/contacto';
 import { useLanguage } from '../i18n/LanguageContext';
 import { fetchJson } from '../lib/fetchJson';
+import { localizePaquete } from '../lib/localizePaquete';
 
 const fmt = (n, lang) =>
   new Intl.NumberFormat(lang === 'en' ? 'en-US' : 'es-CO', {
@@ -22,6 +23,7 @@ export default function PaqueteDetalle() {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    setCargando(true);
     fetchJson(`/api/paquetes/${id}`)
       .then((data) => setP(data))
       .catch((e) => setError(e.message))
@@ -40,10 +42,11 @@ export default function PaqueteDetalle() {
     );
   }
 
-  const imagen = p.imagen_url || '';
-  const descripcion = p.descripcion_larga || p.descripcion_corta || '';
-  const incluye = Array.isArray(p.incluye) ? p.incluye : [];
-  const destino = p.destinos?.nombre || '';
+  const pkg = localizePaquete(p, lang);
+  const imagen = pkg.imagen_url || '';
+  const descripcion = pkg.descripcion_larga || pkg.descripcion_corta || '';
+  const incluye = Array.isArray(pkg.incluye) ? pkg.incluye : [];
+  const destino = pkg.destinos?.nombre || '';
 
   return (
     <div className="container page page-motion">
@@ -52,15 +55,15 @@ export default function PaqueteDetalle() {
       </Link>
       <Reveal delay={80} variant="scale">
         <article className="detail card">
-          <SafeImage className="detail-img" src={imagen} alt={p.nombre} />
+          <SafeImage className="detail-img" src={imagen} alt={pkg.nombre} />
           <div className="detail-body">
             <span className="badge">
-              {p.dias} {t.days}
+              {pkg.dias} {t.days}
               {destino ? ` · ${destino}` : ''}
-              {p.incluye_transporte ? ` · ${t.transportIncluded}` : ''}
+              {pkg.incluye_transporte ? ` · ${t.transportIncluded}` : ''}
             </span>
-            <h1>{p.nombre}</h1>
-            <p className="detail-price">{fmt(p.precio, lang)}</p>
+            <h1>{pkg.nombre}</h1>
+            <p className="detail-price">{fmt(pkg.precio, lang)}</p>
             <p>{descripcion}</p>
             {incluye.length > 0 && (
               <>
@@ -75,7 +78,11 @@ export default function PaqueteDetalle() {
             <div className="detail-actions">
               <a
                 className="btn btn-primary"
-                href={whatsappUrl(`Hola, me interesa ${p.nombre}`)}
+                href={whatsappUrl(
+                  lang === 'en'
+                    ? `Hello, I am interested in ${pkg.nombre}`
+                    : `Hola, me interesa ${pkg.nombre}`
+                )}
                 target="_blank"
                 rel="noreferrer"
               >

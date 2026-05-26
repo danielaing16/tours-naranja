@@ -44,14 +44,18 @@ export function textToItinerario(text) {
 
 export const formVacioPaquete = {
   nombre: '',
+  nombre_en: '',
   descripcion_corta: '',
+  descripcion_corta_en: '',
   descripcion_larga: '',
+  descripcion_larga_en: '',
   precio: '',
   tipo_precio: 'total',
   dias: '',
   destino_id: '',
   intereses: [],
   incluyeText: '',
+  incluyeTextEn: '',
   noIncluyeText: '',
   itinerarioText: '',
   imagen_url: '',
@@ -64,14 +68,18 @@ export const formVacioPaquete = {
 export function paqueteToForm(p) {
   return {
     nombre: p.nombre || '',
+    nombre_en: p.nombre_en || '',
     descripcion_corta: p.descripcion_corta || '',
+    descripcion_corta_en: p.descripcion_corta_en || '',
     descripcion_larga: p.descripcion_larga || '',
+    descripcion_larga_en: p.descripcion_larga_en || '',
     precio: String(p.precio ?? ''),
     tipo_precio: p.tipo_precio || 'total',
     dias: String(p.dias ?? ''),
     destino_id: p.destino_id ? String(p.destino_id) : '',
     intereses: Array.isArray(p.intereses) ? [...p.intereses] : [],
     incluyeText: arrayToLines(p.incluye),
+    incluyeTextEn: arrayToLines(p.incluye_en),
     noIncluyeText: arrayToLines(p.no_incluye),
     itinerarioText: itinerarioToText(p.itinerario),
     imagen_url: p.imagen_url || '',
@@ -83,7 +91,7 @@ export function paqueteToForm(p) {
 }
 
 export function formToPaqueteBody(form) {
-  return {
+  const body = {
     nombre: form.nombre.trim(),
     descripcion_corta: form.descripcion_corta.trim() || null,
     descripcion_larga: form.descripcion_larga.trim() || null,
@@ -101,4 +109,11 @@ export function formToPaqueteBody(form) {
     activo: Boolean(form.activo),
     visible_web: Boolean(form.visible_web),
   };
+
+  body.nombre_en = form.nombre_en?.trim() || null;
+  body.descripcion_corta_en = form.descripcion_corta_en?.trim() || null;
+  body.descripcion_larga_en = form.descripcion_larga_en?.trim() || null;
+  body.incluye_en = linesToArray(form.incluyeTextEn);
+
+  return body;
 }

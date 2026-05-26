@@ -45,6 +45,7 @@ export default {
     daysTour: 'day tours',
     dayMeta: 'day',
     daysMeta: 'days',
+    viewDetail: 'View details',
   },
   footer: {
     tagline:

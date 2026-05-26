@@ -4,6 +4,7 @@ import SafeImage from '../components/SafeImage';
 import Reveal from '../components/ui/Reveal';
 import { whatsappUrl } from '../constants/contacto';
 import { useLanguage } from '../i18n/LanguageContext';
+import { localizePaquete } from '../lib/localizePaquete';
 import { buildWhatsappPlanMessage } from '../lib/whatsappPlanMessage';
 import { buildPlanFromPreferences, fetchPlanFromApi } from '../services/planService';
 
@@ -139,7 +140,8 @@ export default function PlanResultado() {
   const listaDias = itinerario?.length ? itinerario : plan.dias || [];
   const diasMostrar = plan.diasSolicitados ?? listaDias.length;
   const mensajePrincipal = mensaje_ia || mensaje;
-  const imagenPaquete = paquete?.imagen_url || paquete?.imagen || '';
+  const paqueteLoc = paquete ? localizePaquete(paquete, lang) : null;
+  const imagenPaquete = paqueteLoc?.imagen_url || paqueteLoc?.imagen || '';
   const precioLabel =
     plan.precio_estimado != null ? fmt(plan.precio_estimado, lang) : t.priceOnRequest;
   const aliados = plan.aliados || { hoteles: [], restaurantes: [] };
@@ -177,11 +179,11 @@ export default function PlanResultado() {
               <span className="result-summary-label">{t.budget}</span>
               <strong>{fmt(presupuesto, lang)}</strong>
             </div>
-            {!esPersonalizado && paquete && (
+            {!esPersonalizado && paqueteLoc && (
               <div className="result-summary-item result-summary-item--wide">
                 <span className="result-summary-label">{t.recommended}</span>
                 <strong>
-                  {paquete.nombre} · {precioLabel}
+                  {paqueteLoc.nombre} · {precioLabel}
                 </strong>
               </div>
             )}
@@ -205,13 +207,14 @@ export default function PlanResultado() {
             )}
             {esPersonalizado && plan.paquete_cercano && (
               <p className="hint">
-                {t.nearPackage}: {plan.paquete_cercano.nombre}
+                {t.nearPackage}: {localizePaquete(plan.paquete_cercano, lang).nombre}
               </p>
             )}
             {nota && <p className="hint result-preview-hint">{nota}</p>}
             {plan.alternativas?.length > 0 && !esPersonalizado && (
               <p className="hint">
-                {t.alternatives}: {plan.alternativas.map((a) => a.nombre).join(' · ')}
+                {t.alternatives}:{' '}
+                {plan.alternativas.map((a) => localizePaquete(a, lang).nombre).join(' · ')}
               </p>
             )}
           </div>
@@ -231,16 +234,16 @@ export default function PlanResultado() {
           </div>
 
           <div className="card result-side-card">
-            {!esPersonalizado && (
+            {!esPersonalizado && paqueteLoc && (
               <>
-                <SafeImage src={imagenPaquete} alt={paquete?.nombre} className="result-img" />
-                <h3>{paquete?.nombre}</h3>
-                <p>{paquete?.descripcion_corta || paquete?.descripcion}</p>
-                {paquete?.incluye?.length > 0 && (
+                <SafeImage src={imagenPaquete} alt={paqueteLoc.nombre} className="result-img" />
+                <h3>{paqueteLoc.nombre}</h3>
+                <p>{paqueteLoc.descripcion_corta || paqueteLoc.descripcion}</p>
+                {paqueteLoc.incluye?.length > 0 && (
                   <>
                     <h4>{ui.packageDetail.includes}</h4>
                     <ul className="result-includes">
-                      {paquete.incluye.map((x) => (
+                      {paqueteLoc.incluye.map((x) => (
                         <li key={x}>{x}</li>
                       ))}
                     </ul>

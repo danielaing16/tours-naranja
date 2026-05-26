@@ -416,6 +416,34 @@ app.post(
   }
 );
 
+function buildPaqueteFila(body) {
+  const fila = {
+    nombre: body.nombre.trim(),
+    descripcion_corta: body.descripcion_corta || null,
+    descripcion_larga: body.descripcion_larga || null,
+    precio: Number(body.precio),
+    dias: Number(body.dias),
+    destino_id: body.destino_id ? Number(body.destino_id) : null,
+    intereses: body.intereses || [],
+    incluye: body.incluye || [],
+    no_incluye: body.no_incluye || [],
+    incluye_transporte: Boolean(body.incluye_transporte),
+    apto_ninos: body.apto_ninos !== false,
+    imagen_url: body.imagen_url || null,
+    visible_web: body.visible_web !== false,
+    activo: body.activo !== false,
+    itinerario: body.itinerario || [],
+  };
+
+  if (body.tipo_precio) fila.tipo_precio = body.tipo_precio;
+  if (body.nombre_en != null) fila.nombre_en = body.nombre_en?.trim() || null;
+  if (body.descripcion_corta_en != null) fila.descripcion_corta_en = body.descripcion_corta_en?.trim() || null;
+  if (body.descripcion_larga_en != null) fila.descripcion_larga_en = body.descripcion_larga_en?.trim() || null;
+  if (body.incluye_en != null) fila.incluye_en = body.incluye_en;
+
+  return fila;
+}
+
 // ========== ADMIN: Paquetes (protegido) ==========
 app.get('/api/admin/paquetes', authAdmin, async (req, res) => {
   try {
@@ -446,23 +474,7 @@ app.post('/api/admin/paquetes', authAdmin, async (req, res) => {
       return res.status(400).json({ error: 'nombre, precio y dias son obligatorios.' });
     }
 
-    const fila = {
-      nombre: body.nombre.trim(),
-      descripcion_corta: body.descripcion_corta || null,
-      descripcion_larga: body.descripcion_larga || null,
-      precio: Number(body.precio),
-      dias: Number(body.dias),
-      destino_id: body.destino_id ? Number(body.destino_id) : null,
-      intereses: body.intereses || [],
-      incluye: body.incluye || [],
-      no_incluye: body.no_incluye || [],
-      incluye_transporte: Boolean(body.incluye_transporte),
-      apto_ninos: body.apto_ninos !== false,
-      imagen_url: body.imagen_url || null,
-      visible_web: body.visible_web !== false,
-      activo: body.activo !== false,
-      itinerario: body.itinerario || [],
-    };
+    const fila = buildPaqueteFila(body);
 
     const { data, error } = await supabase.from('paquetes').insert(fila).select('*').single();
     if (error) throw error;

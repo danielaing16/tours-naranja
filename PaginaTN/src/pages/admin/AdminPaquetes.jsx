@@ -205,6 +205,42 @@ export default function AdminPaquetes() {
               />
             </div>
 
+            <h3 className="admin-form-section">Versión en inglés (sitio EN)</h3>
+            <p className="hint">
+              Opcional. Si lo dejas vacío, en inglés se usan las traducciones oficiales (paquetes 5–7) o el texto en español.
+            </p>
+            <div className="field">
+              <label>Nombre (EN)</label>
+              <input
+                value={form.nombre_en}
+                onChange={(e) => setForm({ ...form, nombre_en: e.target.value })}
+                placeholder="Package name in English"
+              />
+            </div>
+            <div className="field">
+              <label>Descripción corta (EN)</label>
+              <input
+                value={form.descripcion_corta_en}
+                onChange={(e) => setForm({ ...form, descripcion_corta_en: e.target.value })}
+              />
+            </div>
+            <div className="field">
+              <label>Descripción larga (EN)</label>
+              <textarea
+                rows={4}
+                value={form.descripcion_larga_en}
+                onChange={(e) => setForm({ ...form, descripcion_larga_en: e.target.value })}
+              />
+            </div>
+            <div className="field">
+              <label>Incluye (EN, una línea por ítem)</label>
+              <textarea
+                rows={4}
+                value={form.incluyeTextEn}
+                onChange={(e) => setForm({ ...form, incluyeTextEn: e.target.value })}
+              />
+            </div>
+
             <h3 className="admin-form-section">Precio y duración</h3>
             <div className="field-row">
               <div className="field">
